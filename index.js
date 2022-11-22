@@ -1,89 +1,28 @@
-//import {Alumno} from "./Modelos/Alumno";
-//const alumnoSupremo = require("./Modelos/Alumno");
-const applicationPort = 3000
+const puerto = 8080
 const express = require("express")
-const bodyParser = require("body-parser");
-const { application } = require("express");
+const rutasAlumnos = require("./routes/AlumnosRoutes")
+const rutasProfesores = require("./routes/ProfesoresRoutes")
 const app = express()
-app.use(bodyParser.urlencoded({ extended: false }));
-app.use(bodyParser.json())
 
-const alumnos = []
-/*
-{
-    "id": "",
-    "nombres": "",
-    "apellidos": "",
-    "matricula": "",
-    "promedio": ""
-}
- */
+app.use(express.json())
 
-const profesor = []
-/*
-{
-    "id": "",
-    "numeroEmpleado": "",
-    "nombres": "",
-    "apellidos": "",
-    "horasClase": ""
-}
- */
-let index = 0
-//Rutas de alumno
-app.get("/alumnos", (req, res) => {
-    res.json(alumnos)
-})
-app.get("/alumnos/:id", (req, res) => {
-    console.log(req.params)
-    res.send(`<h1>hola usuario ${req.params.id}</h1>`)
-})
-
-app.post("/alumnos", (req, res) => {
-    console.log(req.body)
-    alumnos.push({
-        id: req.body.id + index,
-        nombres: req.body.nombres,
-        apellidos: req.body.apellidos,
-        matricula: req.body.matricula,
-        promedio: req.body.promedio,
-    })
-    index++
-    res.send("<h1>hello</h1>")
-})
-
-app.put("/alumnos/:id", (req, res) => {
-    res.send("<h1>hello</h1>")
-})
-
-app.delete("/alumnos/:id", (req, res) => {
-    res.send("<h1>hello</h1>")
-})
+//Rutas de alumnos
+app.use("/alumnos", rutasAlumnos)
 
 //Rutas de porfesor
-app.get("/profesores", (req, res) => {
-    res.send("<h1>hello</h1>")
-})
-app.get("/profesores/:id", (req, res) => {
-    console.log(req.params)
-    res.send(`<h1>hola usuario ${req.params.id}</h1>`)
-})
-
-app.post("/profesores", (req, res) => {
-    res.send("<h1>hello</h1>")
-})
-
-app.put("/profesores/:id", (req, res) => {
-    res.send("<h1>hello</h1>")
-})
-
-app.delete("/profesores/:id", (req, res) => {
-    res.send("<h1>hello</h1>")
-})
+app.use("/profesores", rutasProfesores)
 
 
-app.listen(applicationPort, () => {
-    console.log(`El servidor está corriendo en el puerto: ${applicationPort}`);
-    console.log(`URL: http://localhost:${applicationPort}`);
+app.use((req, res, next) => {
+    res.status(404).send(`
+        <h1>Error 404</h1>
+        <h3>La dirección ingresada no existe</h3>
+        <p>${req.method}: ${req.originalUrl}</p>`
+    )
+})
+
+app.listen(puerto, () => {
+    console.log(`El servidor está corriendo en el puerto: ${puerto}`);
+    console.log(`URL: http://localhost:${puerto}`);
 })
 
