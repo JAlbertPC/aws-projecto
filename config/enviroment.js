@@ -1,0 +1,28 @@
+require("dotenv").config();
+const PORT = 8080;
+const DATABASE = process.env.DATABASE;
+const DATABASEUSER = process.env.DATABASEUSER;
+const DATABASEPASSWORD = process.env.DATABASEPASSWORD;
+const DATABASEHOST = process.env.DATABASEHOST;
+const DATABASEDIALECT = process.env.DATABASEDIALECT;
+const S3BUCKET = process.env.S3BUCKET;
+const S3ACL = process.env.S3ACL;
+const S3ACCESSKEYID = process.env.S3ACCESSKEYID;
+const S3SECRETACCESSKEY = process.env.S3SECRETACCESSKEY;
+const S3SESSIONTOKEN = process.env.S3SESSIONTOKEN;
+const S3REGION = process.env.S3REGION;
+
+module.exports = {
+    PORT,
+    DATABASE,
+    DATABASEUSER,
+    DATABASEPASSWORD,
+    DATABASEHOST,
+    DATABASEDIALECT,
+    S3BUCKET,
+    S3ACL,
+    S3ACCESSKEYID,
+    S3SECRETACCESSKEY,
+    S3SESSIONTOKEN,
+    S3REGION,
+};
