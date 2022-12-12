@@ -5,7 +5,7 @@ const {
     createProfessor,
     updateProfessor,
     deleteProfessor,
-} = require("../controller/profesorController");
+} = require("../controller/ProfessorController");
 const professorsRoutes = express.Router();
 
 /*
